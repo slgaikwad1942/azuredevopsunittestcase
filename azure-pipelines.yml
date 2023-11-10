@@ -17,15 +17,12 @@ variables:
 steps:
     
 - task: DotNetCoreCLI@2
-
   inputs:
-    command: 'build'
-    projects: 'azuredevopsunittestcase/*.csproj'
-- task: DotNetCoreCLI@2
-  inputs:
-    command: 'publish'
-    publishWebProjects: true
-    workingDirectory: '$(System.DefaultWorkingDirectory)'
+    command: 'restore'
+    projects: '**/*.csproj'
+    feedsToUse: 'select'
+    vstsFeed: 'config'
+    
 
      
   
