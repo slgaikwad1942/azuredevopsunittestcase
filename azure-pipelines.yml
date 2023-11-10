@@ -23,12 +23,22 @@ steps:
   inputs:
     command: 'restore'
     projects: 'dotnetappswithunitestcase/*.csproj'
+  displayName: 'Restore of dotnet'  
 - task: DotNetCoreCLI@2
   inputs:
     command: 'build'
     arguments: '--configuration $(buildConfiguration)'
     projects: 'dotnetappswithunitestcase/*.csproj'
-  displayName: 'dotnet build $(buildConfiguration)'    
+  displayName: 'dotnet build $(buildConfiguration)'   
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'test'
+    projects: 'dotnet'
+    arguments: '--configuraiton $(buildConfiguration)'
+    testRunTitle: 'dotnetunittestreport'
+
+
+   
     
     
 
