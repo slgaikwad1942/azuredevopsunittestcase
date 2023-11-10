@@ -33,8 +33,9 @@ steps:
 - task: DotNetCoreCLI@2
   inputs:
     command: 'test'
-    projects: 'dotnet'
-    arguments: '--configuraiton $(buildConfiguration)'
+    
+    projects: 'dotnetunittestcase/*.csproj'
+    arguments: '--configuration $(buildConfiguration) --collect:"XPlat Code Coverage" -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=cobertura'
     testRunTitle: 'dotnetunittestreport'
 
 
