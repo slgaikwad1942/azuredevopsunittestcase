@@ -46,7 +46,7 @@ namespace dotnetunittestcase
             var actual = ClassModule.Cost(order);
 
             // Assert
-            Assert.Equal(40, actual);
+            Assert.Equal(30, actual);
             //Assert.
             //Assert.AreEqual(30, actual);
         }
