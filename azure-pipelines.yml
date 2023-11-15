@@ -24,7 +24,7 @@ steps:
   inputs:
      SonarQube: 'sonarqubesvcconn'
      scannerMode: 'MSBuild'
-     projectKey: 'dotnetcoredocker_dotnetcoredocker_AYvSQQHXqL2lZfew5ODN'
+     projectKey: 'dotnetcoredocker_dotnetcoredocker_AYvTLTe9ZRXHkaAxlSv7'
      projectName: 'dotnetcoredocker'
 - task: DotNetCoreCLI@2
   inputs:
