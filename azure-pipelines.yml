@@ -18,7 +18,14 @@ steps:
 - task: UseDotNet@2
   inputs:
     packageType: 'sdk'
-    version: '6.x'    
+    version: '6.x'   
+
+- task: SonarQubePrepare@5
+  inputs:
+     SonarQube: 'sonarqubesvcconn'
+     scannerMode: 'MSBuild'
+     projectKey: 'dotnetcoredocker_dotnetcoredocker_AYvSQQHXqL2lZfew5ODN'
+     projectName: 'dotnetcoredocker'
 - task: DotNetCoreCLI@2
   inputs:
     command: 'restore'
@@ -30,6 +37,12 @@ steps:
     arguments: '--configuration $(buildConfiguration)'
     projects: 'dotnetappswithunitestcase/*.csproj'
   displayName: 'dotnet build $(buildConfiguration)'   
+- task: SonarQubeAnalyze@5
+  inputs:
+    jdkversion: 'JAVA_HOME_11_X64'
+- task: SonarQubePublish@5
+  inputs:
+    pollingTimeoutSec: '300'
 - task: DotNetCoreCLI@2
   inputs:
     command: 'test'
