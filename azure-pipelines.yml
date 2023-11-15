@@ -26,11 +26,12 @@ steps:
      scannerMode: 'MSBuild'
      projectKey: 'dotnetcoredocker_dotnetcoredocker_AYvTLTe9ZRXHkaAxlSv7'
      projectName: 'dotnetcoredocker'
+     
 - task: DotNetCoreCLI@2
   inputs:
     command: 'restore'
     projects: 'dotnetappswithunitestcase/*.csproj'
-  displayName: 'Restore of dotnet'  
+  displayName: 'Restore of dotnet  sourcebranch $(Build.SourceBranch)'  
 - task: DotNetCoreCLI@2
   inputs:
     command: 'build'
