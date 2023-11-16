@@ -31,19 +31,14 @@ steps:
   inputs:
     command: 'restore'
     projects: 'dotnetappswithunitestcase/*.csproj'
-  displayName: 'Restore of dotnet  sourcebranch $(Build.SourceBranch)'  
+  displayName: 'Restore of dotnet  '  
 - task: DotNetCoreCLI@2
   inputs:
     command: 'build'
     arguments: '--configuration $(buildConfiguration)'
     projects: 'dotnetappswithunitestcase/*.csproj'
   displayName: 'dotnet build $(buildConfiguration)'   
-- task: SonarQubeAnalyze@5
-  inputs:
-    jdkversion: 'JAVA_HOME'
-- task: SonarQubePublish@5
-  inputs:
-    pollingTimeoutSec: '300'
+
 - task: DotNetCoreCLI@2
   inputs:
     command: 'test'
