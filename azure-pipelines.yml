@@ -20,12 +20,12 @@ steps:
     packageType: 'sdk'
     version: '6.x'   
 
-- task: SonarQubePrepare@5
-  inputs:
-     SonarQube: 'sonarqubesvcconn'
-     scannerMode: 'MSBuild'
-     projectKey: 'dotnetcoredocker_dotnetcoredocker_AYvTLTe9ZRXHkaAxlSv7'
-     projectName: 'dotnetcoredocker'
+# - task: SonarQubePrepare@5
+#  inputs:
+#     SonarQube: 'sonarqubesvcconn'
+#     scannerMode: 'MSBuild'
+#     projectKey: 'dotnetcoredocker_dotnetcoredocker_AYvTLTe9ZRXHkaAxlSv7'
+#     projectName: 'dotnetcoredocker'
      
 - task: DotNetCoreCLI@2
   inputs:
