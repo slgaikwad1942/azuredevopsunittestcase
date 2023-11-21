@@ -63,7 +63,7 @@ steps:
     azureSubscription: 'Azure subscription 1(1b5f28cb-5b3c-419e-84d4-09403138d50c)'
     appType: 'webApp'
     WebAppName: 'dotnetappdev'
-    packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
+    packageForLinux: '$(Build.ArtifactStagingDirectory)/*.zip'
 
 
    
