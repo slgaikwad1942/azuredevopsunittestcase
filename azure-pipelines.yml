@@ -13,13 +13,12 @@ variables:
   solution: '**/*.sln'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
-  
-  steps:
+
+steps:
 - task: UseDotNet@2
-    inputs:
+  inputs:
     packageType: 'sdk'
-    version: '6.x'  
- 
+    version: '6.x'   
 
 # - task: SonarQubePrepare@5
 #  inputs:
@@ -27,33 +26,51 @@ variables:
 #     scannerMode: 'MSBuild'
 #     projectKey: 'dotnetcoredocker_dotnetcoredocker_AYvTLTe9ZRXHkaAxlSv7'
 #     projectName: 'dotnetcoredocker'
+     
 - task: DotNetCoreCLI@2
-
   inputs:
     command: 'restore'
     projects: 'dotnetappswithunitestcase/*.csproj'
   displayName: 'Restore of dotnet  '  
-
 - task: DotNetCoreCLI@2
   inputs:
     command: 'build'
+    arguments: '--configuration $(buildConfiguration)'
     projects: 'dotnetappswithunitestcase/*.csproj'
-    arguments: '$(buildConfiguration)'
+  displayName: 'dotnet build $(buildConfiguration)'   
+
 - task: DotNetCoreCLI@2
   inputs:
     command: 'test'
-    projects: 'dotnetunittestcase\*.csproj'
-    publishTestResults: false
+    
+    projects: 'dotnetunittestcase/*.csproj'
+    arguments: '--configuration $(buildConfiguration) --collect:"XPlat Code Coverage" -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=cobertura'
+    testRunTitle: 'dotnetunittestreport'
+
 - task: DotNetCoreCLI@2
   inputs:
     command: 'publish'
     publishWebProjects: true
-    arguments: '--Configuration $(BuildConfiguration) --output (Build.ArtifactStagingDirectory)'
-    ZipAfterPublish:true
-  
-
-- task: PublishBuildArtifacts@1
+    arguments: '--configuration $(BuildConfiguration) --output $(Build.ArtifactStagingDirectory)'
+    zipAfterPublish: True
+- task: PublishPipelineArtifact@1
   inputs:
-    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-    ArtifactName: 'dotnetunittestcase'
+   targetPath:  $(Build.ArtifactStagingDirectory)
+   artifactName: 'dotnetappsunittestcase'
+
+- task: AzureRmWebAppDeployment@4
+  inputs:
+    ConnectionType: 'AzureRM'
+    azureSubscription: 'Free Trial(b91d56bd-7eaf-4bfd-b821-c4ad305840b2)'
+    appType: 'webApp'
+    WebAppName: 'dotnetapps-dev'
+    packageForLinux: '$(Build.ArtifactStagingDirectory)/*.zip'
+
    
+    
+    
+
+     
+  
+   
+    
