@@ -58,6 +58,14 @@ steps:
    targetPath:  $(Build.ArtifactStagingDirectory)
    artifactName: 'dotnetappsunittestcase'
 
+- task: AzureRmWebAppDeployment@4
+  inputs:
+    ConnectionType: 'AzureRM'
+    azureSubscription: 'Azure subscription 1 (b91d56bd-7eaf-4bfd-b821-c4ad305840b2)'
+    appType: 'webApp'
+    WebAppName: 'dotnetapsdev'
+    packageForLinux: '$(Build.ArtifactStagingDirectory)/*.zip'
+
   
    
     
